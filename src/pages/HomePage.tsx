@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { 
   Wallet, 
   Briefcase, 
@@ -15,12 +15,16 @@ import { EducationalModule } from '../components/common/EducationalModule';
 import { VAT_EDUCATIONAL_CONTENT } from '../data/educationalContent';
 
 export const HomePage: React.FC = () => {
+  const location = useLocation();
+  const canonicalPath = location.pathname === '/vat-calculator' ? '/vat-calculator' : '/';
+  const fullPageUrl = `https://vatcalcs.net${canonicalPath === '/' ? '/' : canonicalPath}`;
+
   return (
     <div className="space-y-12">
       <SEOHead
         title="VAT Calculator & Sales Tax Suite | vatcalcs.net — Fast, Free & 100% Privacy-First"
         description="Free online VAT & sales tax calculator. Add or extract VAT instantly with Irish (23%), UK (20%), EU, and US tax presets. 100% private, client-side math."
-        canonicalPath="/"
+        canonicalPath={canonicalPath}
         applicationCategory="FinanceApplication"
         schemaType="WebApplication"
       />
@@ -128,7 +132,7 @@ export const HomePage: React.FC = () => {
       </div>
 
       {/* 600+ Words Rich Educational Guide & FAQ Accordions */}
-      <EducationalModule guide={VAT_EDUCATIONAL_CONTENT} pageUrl="https://vatcalcs.net/" />
+      <EducationalModule guide={VAT_EDUCATIONAL_CONTENT} pageUrl={fullPageUrl} />
 
       {/* Bottom AdSense Placement */}
       <AdPlaceholder slotId="home-bottom-banner" format="horizontal" />
