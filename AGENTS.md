@@ -21,3 +21,19 @@ Please refer to the comprehensive guidelines and change logs in [AGENTS.md](file
   3. Executed `git init`, `git branch -M main`, and committed 51 files (v1.0.0).
   4. Added remote `origin https://github.com/hakro10/vat_calculator.git` and pushed upstream with tracking (`git push -u origin main`).
 - **Verification Steps**: Checked `git status` (clean working tree) and confirmed tracking against `origin/main`.
+
+### [2026-08-16] — Light Mode Theme Alignment & Removal of Hardcoded Dark Blocks
+- **Component/File Impacted**:
+  - `src/components/common/EducationalModule.tsx`
+  - `src/components/calculators/VatCalculator.tsx`
+  - `src/components/calculators/SalaryCalculator.tsx`
+  - `src/components/calculators/FreelanceCalculator.tsx`
+  - `src/components/calculators/CapitalGainsCalculator.tsx`
+  - `src/components/calculators/MarginCalculator.tsx`
+- **Summary of Change**: Fixed all hardcoded dark `bg-slate-900` sections so that in Light Mode all hero cards, summary blocks, formula boxes, and quarterly payment cards render with brand emerald and light backgrounds, while properly switching to dark slate in Dark Mode.
+- **Problem / Motivation**: In Light Mode, several hero result cards and formula code boxes retained pitch-black/dark navy background blocks (`bg-slate-900`) instead of adapting dynamically to the active theme.
+- **Method / Solution**:
+  1. Updated `EducationalModule.tsx` formula block from hardcoded `bg-slate-900` to `bg-slate-100 dark:bg-slate-950 text-slate-800 dark:text-slate-100 border-slate-200 dark:border-slate-800`.
+  2. Updated result hero cards in `VatCalculator.tsx`, `SalaryCalculator.tsx`, `CapitalGainsCalculator.tsx`, and `MarginCalculator.tsx` to `bg-emerald-600 dark:bg-slate-900 text-white` with glowing emerald shadows in Light Mode.
+  3. Updated quarterly payment box in `FreelanceCalculator.tsx` to `bg-amber-500/10 dark:bg-slate-900 border-amber-500/30`.
+- **Verification Steps**: Ran full build (`tsc && vite build`) with 0 errors and verified rendering across all calculator routes.

@@ -373,17 +373,17 @@ export const FreelanceCalculator: React.FC = () => {
             </div>
 
             {/* Quarterly Set-Aside Card */}
-            <div className="p-4 rounded-xl bg-slate-900 text-white dark:bg-slate-950 border border-slate-800 space-y-1">
-              <span className="text-xs font-bold uppercase tracking-wider text-amber-400">
+            <div className="p-4 rounded-xl bg-amber-500/10 dark:bg-slate-900 border border-amber-500/30 dark:border-slate-800 space-y-1">
+              <span className="text-xs font-bold uppercase tracking-wider text-amber-700 dark:text-amber-400">
                 Recommended Quarterly Tax Payment
               </span>
               <div className="flex items-baseline justify-between">
-                <span className="text-2xl font-bold font-mono text-white">
+                <span className="text-2xl font-bold font-mono text-slate-900 dark:text-white">
                   {formatCurrency(breakdown.recommendedQuarterlyTaxPayment, currency)}
                 </span>
-                <span className="text-xs text-slate-400">every 3 months</span>
+                <span className="text-xs text-slate-500 dark:text-slate-400">every 3 months</span>
               </div>
-              <p className="text-[11px] text-slate-400">
+              <p className="text-[11px] text-slate-600 dark:text-slate-400">
                 Total annual tax reserve: {formatCurrency(breakdown.totalTaxReserve, currency)} ({breakdown.totalTaxReservePercent.toFixed(1)}% of revenue)
               </p>
             </div>

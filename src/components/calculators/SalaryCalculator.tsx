@@ -258,12 +258,12 @@ export const SalaryCalculator: React.FC = () => {
           <div className="glass-card p-6 sm:p-8 space-y-6 bg-gradient-to-b from-white via-white to-emerald-50/30 dark:from-slate-900 dark:via-slate-900 dark:to-emerald-950/20 border-emerald-500/20 shadow-xl">
             
             {/* Take-Home Pay Hero Display */}
-            <div className="p-5 rounded-2xl bg-slate-900 text-white dark:bg-slate-950 border border-slate-800 shadow-xl space-y-2">
+            <div className="p-5 rounded-2xl bg-emerald-600 dark:bg-slate-900 text-white border border-emerald-500/40 dark:border-slate-800 shadow-xl shadow-emerald-600/20 dark:shadow-none space-y-2">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-bold uppercase tracking-wider text-emerald-400">
+                <span className="text-xs font-bold uppercase tracking-wider text-emerald-100 dark:text-emerald-400">
                   Estimated Take-Home Pay
                 </span>
-                <span className="badge bg-emerald-500/20 text-emerald-300 font-mono text-[11px]">
+                <span className="badge bg-emerald-700/60 dark:bg-emerald-500/20 text-white dark:text-emerald-300 font-mono text-[11px]">
                   Effective Rate: {breakdown.effectiveTaxRate}%
                 </span>
               </div>
@@ -272,7 +272,7 @@ export const SalaryCalculator: React.FC = () => {
                 <span className="text-3xl sm:text-4xl font-black font-mono text-white tracking-tight">
                   {formatCurrency(breakdown.payPeriods[activeFrequency], currency)}
                 </span>
-                <span className="text-xs text-slate-400 capitalize font-medium">
+                <span className="text-xs text-emerald-100/90 dark:text-slate-400 capitalize font-medium">
                   per {activeFrequency === 'biweekly' ? 'bi-week' : activeFrequency}
                 </span>
               </div>

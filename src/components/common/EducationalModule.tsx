@@ -95,8 +95,8 @@ export const EducationalModule: React.FC<EducationalModuleProps> = ({ guide, pag
 
             {/* Formula Block if present */}
             {section.formulaSnippet && (
-              <div className="mt-4 p-4 rounded-xl bg-slate-900 dark:bg-slate-950 text-slate-100 border border-slate-800 font-mono text-xs sm:text-sm overflow-x-auto shadow-inner">
-                <div className="flex items-center gap-2 text-emerald-400 text-xs font-bold uppercase tracking-wider mb-2">
+              <div className="mt-4 p-4 rounded-xl bg-slate-100 dark:bg-slate-950 text-slate-800 dark:text-slate-100 border border-slate-200 dark:border-slate-800 font-mono text-xs sm:text-sm overflow-x-auto shadow-inner">
+                <div className="flex items-center gap-2 text-emerald-700 dark:text-emerald-400 text-xs font-bold uppercase tracking-wider mb-2">
                   <CalcIcon className="w-3.5 h-3.5" />
                   <span>Mathematical Formula</span>
                 </div>

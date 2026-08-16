@@ -297,17 +297,17 @@ export const CapitalGainsCalculator: React.FC = () => {
           <div className="glass-card p-6 sm:p-8 space-y-6 bg-gradient-to-b from-white via-white to-emerald-50/30 dark:from-slate-900 dark:via-slate-900 dark:to-emerald-950/20 border-emerald-500/20 shadow-xl">
             
             {/* Gain/Loss Hero Display */}
-            <div className={`p-5 rounded-2xl text-white shadow-xl space-y-1 ${breakdown.isLoss ? 'bg-rose-600' : 'bg-slate-900 dark:bg-slate-950 border border-slate-800'}`}>
+            <div className={`p-5 rounded-2xl text-white shadow-xl space-y-1 ${breakdown.isLoss ? 'bg-rose-600' : 'bg-emerald-600 dark:bg-slate-900 border border-emerald-500/40 dark:border-slate-800 shadow-emerald-600/20 dark:shadow-none'}`}>
               <div className="flex items-center justify-between">
-                <span className="text-xs font-bold uppercase tracking-wider text-emerald-400">
+                <span className="text-xs font-bold uppercase tracking-wider text-emerald-100 dark:text-emerald-400">
                   {breakdown.isLoss ? 'Capital Loss' : 'Gross Capital Gain'}
                 </span>
-                <span className="badge bg-emerald-500/20 text-emerald-300 font-mono text-[11px]">
+                <span className="badge bg-emerald-700/60 dark:bg-emerald-500/20 text-white dark:text-emerald-300 font-mono text-[11px]">
                   Net ROI: {breakdown.netRoiPercent.toFixed(1)}%
                 </span>
               </div>
               <div className="flex items-baseline justify-between">
-                <span className="text-3xl sm:text-4xl font-black font-mono tracking-tight">
+                <span className="text-3xl sm:text-4xl font-black font-mono tracking-tight text-white">
                   {formatCurrency(breakdown.grossCapitalGainOrLoss, currency)}
                 </span>
               </div>

@@ -449,18 +449,18 @@ export const VatCalculator: React.FC = () => {
               </div>
 
               {/* Gross Total */}
-              <div className="p-4 rounded-xl bg-slate-900 text-white dark:bg-slate-950 border border-slate-800 flex items-center justify-between shadow-lg">
+              <div className="p-4 rounded-xl bg-emerald-600 dark:bg-slate-900 text-white border border-emerald-500/40 dark:border-slate-800 flex items-center justify-between shadow-lg shadow-emerald-600/20 dark:shadow-none">
                 <div>
-                  <span className="text-xs font-bold text-slate-300 uppercase tracking-wider block">
+                  <span className="text-xs font-bold text-emerald-100 dark:text-slate-300 uppercase tracking-wider block">
                     Gross Total (Incl. VAT)
                   </span>
-                  <span className="text-2xl sm:text-3xl font-black font-mono text-emerald-400">
+                  <span className="text-2xl sm:text-3xl font-black font-mono text-white dark:text-emerald-400">
                     {formatCurrency(result.grossAmount, currency)}
                   </span>
                 </div>
                 <div className="text-right">
-                  <span className="text-[10px] text-slate-400 block uppercase">Multiplier</span>
-                  <span className="text-xs font-mono font-bold text-slate-200">×{result.effectiveMultiplier}</span>
+                  <span className="text-[10px] text-emerald-100/80 dark:text-slate-400 block uppercase">Multiplier</span>
+                  <span className="text-xs font-mono font-bold text-white dark:text-slate-200">×{result.effectiveMultiplier}</span>
                 </div>
               </div>
 
