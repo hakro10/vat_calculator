@@ -7,6 +7,7 @@ import {
   PieChart, 
   ArrowRight
 } from 'lucide-react';
+import { SEOHead } from '../components/common/SEOHead';
 import { VatCalculator } from '../components/calculators/VatCalculator';
 import { PrivacyBadge } from '../components/common/PrivacyBadge';
 import { AdPlaceholder } from '../components/common/AdPlaceholder';
@@ -16,6 +17,13 @@ import { VAT_EDUCATIONAL_CONTENT } from '../data/educationalContent';
 export const HomePage: React.FC = () => {
   return (
     <div className="space-y-12">
+      <SEOHead
+        title="VAT Calculator & Sales Tax Suite | vatcalcs.net — Fast, Free & 100% Privacy-First"
+        description="Free online VAT & sales tax calculator. Add or extract VAT instantly with Irish (23%), UK (20%), EU, and US tax presets. 100% private, client-side math."
+        canonicalPath="/"
+        applicationCategory="FinanceApplication"
+        schemaType="WebApplication"
+      />
       
       {/* Hero Section */}
       <div className="text-center space-y-4 max-w-4xl mx-auto pt-4 sm:pt-8">

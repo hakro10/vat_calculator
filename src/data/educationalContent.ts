@@ -1,4 +1,15 @@
-export interface FaqItem {
+export interface EducationalSection {
+  heading: string;
+  content: string[];
+  formulaSnippet?: string;
+  exampleBox?: {
+    title: string;
+    steps: string[];
+    result: string;
+  };
+}
+
+export interface FAQItem {
   question: string;
   answer: string;
 }
@@ -8,97 +19,93 @@ export interface EducationalGuide {
   subtitle: string;
   summary: string;
   keyTakeaways: string[];
-  sections: {
-    heading: string;
-    content: string[];
-    formulaSnippet?: string;
-    exampleBox?: {
-      title: string;
-      steps: string[];
-      result: string;
-    };
-  }[];
-  faqs: FaqItem[];
+  sections: EducationalSection[];
+  faqs: FAQItem[];
 }
 
 export const VAT_EDUCATIONAL_CONTENT: EducationalGuide = {
-  title: 'Comprehensive Guide to Value-Added Tax (VAT) & Sales Tax',
-  subtitle: 'Master VAT addition, reverse VAT extraction formulas, and cross-border commercial compliance.',
-  summary: 'Value-Added Tax (VAT) is a consumption tax assessed on the value added to goods and services at each stage of the supply chain. Unlike a simple retail sales tax, VAT is collected fractionally by businesses and remitted to national revenue authorities such as HMRC in the UK, Revenue Commissioners in Ireland, or tax agencies across the European Union.',
+  title: 'Comprehensive Guide to VAT, Sales Tax & Reverse Calculations',
+  subtitle: 'Master the mathematics of Value Added Tax, understand input vs. output VAT, and learn how to add or reverse tax calculations with precision.',
+  summary: 'Value Added Tax (VAT) is a consumption tax assessed on the value added to goods and services at each stage of the supply chain. Whether you are invoicing a client (adding VAT) or verifying a vendor receipt (extracting VAT), understanding the underlying mathematics ensures compliance with revenue authorities and protects your profit margins.',
   keyTakeaways: [
-    'Adding VAT (exclusive to inclusive) multiplies the net cost by (1 + tax rate / 100).',
-    'Extracting VAT (inclusive to exclusive) divides the gross total by (1 + tax rate / 100).',
-    'Zero-rated goods (0% VAT) allow businesses to reclaim input tax, while exempt goods do not.',
-    'EU One-Stop-Shop (OSS) simplifies cross-border B2C digital sales within member states.',
+    'Adding VAT uses the formula: Gross = Net × (1 + Rate / 100).',
+    'Extracting VAT uses the reverse formula: Net = Gross ÷ (1 + Rate / 100).',
+    'Never calculate reverse VAT by simply multiplying the gross by the tax percentage (e.g. 20% of €120 is €24, but the actual VAT portion is €20).',
+    'Businesses registered for VAT can claim back input VAT on allowable business purchases to offset output VAT collected on sales.',
   ],
   sections: [
     {
-      heading: '1. Understanding the Mechanics of Value-Added Tax (VAT)',
+      heading: '1. The Difference Between Adding VAT and Extracting VAT',
       content: [
-        'Value-Added Tax (VAT), known in some jurisdictions as the Goods and Services Tax (GST), is an indirect consumption tax levied incrementally on the value created at each stage of production, distribution, and final sale. Businesses act as tax collectors on behalf of the government: they charge "output VAT" on their sales and deduct "input VAT" incurred on eligible business purchases, remitting only the net difference to the tax authority.',
-        'If a business collects more output VAT than it incurs in input VAT, it pays the balance to the government. Conversely, if input VAT exceeds output VAT during a filing period (such as during heavy capital expenditure or inventory stocking), the business can claim a cash refund or tax credit from the state revenue body.',
-        'VAT structures are prevalent worldwide, standardizing commercial taxation across more than 170 countries, including all 27 European Union member states, the United Kingdom, Australia, New Zealand, and Canada. In contrast, the United States relies primarily on state and local retail sales taxes collected exclusively at the point of final consumer sale.',
+        'When dealing with Value Added Tax or Sales Tax, two distinct mathematical operations are commonly required:',
+        '• Adding VAT (Exclusive to Inclusive): This operation starts with a Net base price and calculates the additional tax that must be charged to the end customer. For example, a consulting service quoted at $100 with a 23% VAT rate will have a final invoice total of $123 ($100 Net + $23 VAT).',
+        '• Extracting / Reverse VAT (Inclusive to Exclusive): This operation begins with a Gross final price (such as a retail till receipt) and calculates backwards to determine the underlying Net amount and the tax portion. A common beginner error is taking 20% of the Gross price, which incorrectly overstates the tax. The mathematically correct method is dividing the Gross amount by (1 + Tax Rate).',
       ],
+      formulaSnippet: `To Add VAT (Find Gross Total):
+  Gross Amount = Net Amount × (1 + VAT Rate ÷ 100)
+  VAT Portion  = Net Amount × (VAT Rate ÷ 100)
+
+To Extract VAT (Find Net Base & VAT from Gross):
+  Net Amount   = Gross Amount ÷ (1 + VAT Rate ÷ 100)
+  VAT Portion  = Gross Amount - Net Amount = Gross Amount × [VAT Rate ÷ (100 + VAT Rate)]`,
     },
     {
-      heading: '2. The Two Core VAT Mathematical Formulas',
+      heading: '2. Worked Examples Across Global VAT Rates',
       content: [
-        'When quoting commercial prices or reconciling invoices, businesses frequently encounter two distinct mathematical problems: adding VAT to a net price (VAT exclusive to VAT inclusive), and reverse-calculating the net amount and tax portion from a gross receipt (VAT inclusive to VAT exclusive).',
-        'A common arithmetic mistake is attempting to reverse VAT by subtracting the percentage directly (e.g., subtracting 20% from a gross price of $120, which results in $96 rather than the correct net price of $100). Because the tax was originally calculated on the smaller net base, removing it requires dividing by the inclusive multiplier factor.',
+        'Let us examine how these mathematical formulas behave across common tax jurisdictions worldwide:',
+        '• Ireland Standard Rate (23%): For a gross retail receipt of €246.00, dividing by 1.23 yields a Net amount of €200.00. The VAT portion is exactly €46.00 (€246.00 - €200.00).',
+        '• United Kingdom Standard Rate (20%): For a gross purchase of £120.00, dividing by 1.20 yields a Net amount of £100.00. The extracted tax is £20.00.',
+        '• Germany Standard Rate (19%): For a gross price of €119.00, dividing by 1.19 yields a Net amount of €100.00, with a tax portion of €19.00.',
+        '• US Sales Tax Example (8.875% NYC): A product priced at $100.00 Net incurs $8.88 sales tax, resulting in a customer total of $108.88.',
       ],
-      formulaSnippet: `Add VAT Formula:
-Gross Total = Net Amount × (1 + Rate / 100)
-VAT Amount  = Net Amount × (Rate / 100)
-
-Extract VAT (Reverse VAT) Formula:
-Net Amount  = Gross Total ÷ (1 + Rate / 100)
-VAT Amount  = Gross Total - Net Amount`,
       exampleBox: {
-        title: 'Worked Example: Extracting 23% Irish VAT from a €246.00 Invoice',
+        title: 'Worked Example: Extracting 23% Irish VAT from a €615.00 Commercial Invoice',
         steps: [
-          'Step 1: Identify the gross total (€246.00) and the applicable standard VAT rate (23%).',
-          'Step 2: Calculate the divisor factor: 1 + (23 / 100) = 1.23.',
-          'Step 3: Calculate the net amount: €246.00 ÷ 1.23 = €200.00.',
-          'Step 4: Determine the VAT portion: €246.00 - €200.00 = €46.00.',
+          'Step 1: Identify the Gross Amount = €615.00 and VAT Rate = 23%.',
+          'Step 2: Calculate the divisor: 1 + (23 ÷ 100) = 1.23.',
+          'Step 3: Calculate the Net Amount: €615.00 ÷ 1.23 = €500.00.',
+          'Step 4: Subtract Net from Gross to find VAT: €615.00 - €500.00 = €115.00.',
+          'Verification: €500.00 × 0.23 = €115.00, and €500.00 + €115.00 = €615.00.',
         ],
-        result: 'Net Amount = €200.00 | VAT Component (23%) = €46.00 | Gross Total = €246.00',
+        result: 'Net Amount = €500.00 | VAT Extracted = €115.00 | Effective Multiplier = 1.230',
       },
     },
     {
-      heading: '3. Regional VAT Presets and Regulatory Thresholds',
+      heading: '3. Input VAT vs. Output VAT in Business Accounting',
       content: [
-        'Different countries apply multiple tier rates depending on whether products are deemed essential, luxury, or socially beneficial:',
-        '• Ireland (Revenue Commissioners): Standard rate is 23% (electronics, clothing, professional services). Reduced rate is 13.5% (energy, building services, domestic fuel). Second reduced rate is 9% (periodicals, ebooks). Zero rate (0%) applies to basic food staples, children books, and medical prescriptions.',
-        '• United Kingdom (HMRC): Standard rate is 20%. Reduced rate is 5% (domestic gas/electricity, child car seats). Zero rate (0%) applies to standard food groceries, books, and children apparel. The UK VAT registration threshold stands at £90,000 turnover.',
-        '• European Union Single Market: While member states set individual standard rates (ranging from 17% in Luxembourg to 27% in Hungary), the EU VAT Directive harmonizes core invoicing and cross-border rules. B2B cross-border transactions within the EU typically use the "Reverse Charge Mechanism," shifting VAT accounting to the recipient.',
-        '• United States (Sales Tax): Unlike European VAT, US sales taxes are single-stage and non-recoverable by end consumers. Combined state, county, and municipal sales taxes range from 0% (Delaware, Oregon, Montana, New Hampshire) to over 10% in parts of California, Illinois, and Washington.',
+        'If your business is VAT-registered, you act as an official tax collector for the government revenue authority. The tax you charge on your sales invoices is known as "Output VAT", while the tax you pay on business purchases (such as web hosting, equipment, or inventory) is known as "Input VAT".',
+        'At the end of each tax accounting period (usually bi-monthly or quarterly), you calculate the net tax liability: Net VAT Due = Output VAT - Input VAT. If your Input VAT exceeds your Output VAT during a period (e.g. during large initial capital expenditure), you are entitled to a tax refund from the Revenue authority.',
       ],
     },
     {
-      heading: '4. Zero-Rated vs. Exempt Supplies: Critical Differences',
+      heading: '4. Common VAT Compliance Pitfalls & Best Practices',
       content: [
-        'A critical distinction in VAT compliance is the difference between "Zero-Rated" (0%) goods and "Exempt" goods. Although consumers pay zero tax in both scenarios, the implications for businesses are profoundly different:',
-        '1. Zero-Rated Supplies: The transaction is taxable, but the rate applied is 0%. Businesses supplying zero-rated goods (such as export sales, staple food, or prescription medicines) CAN reclaim all input VAT paid on their related overheads, materials, and production costs.',
-        '2. Exempt Supplies: The transaction is outside the scope of VAT. Businesses providing exempt services (such as banking, insurance, healthcare, or residential leasing) CANNOT charge VAT and CANNOT reclaim any input VAT incurred on their business expenses.',
+        '• Never Treat Collected VAT as Revenue: Always maintain a separate tax bank account to hold collected Output VAT so funds remain available when filing returns.',
+        '• Check Invoicing Requirements: A valid VAT invoice must display your business name, address, VAT registration number, sequential invoice number, date, tax rate per line, and total VAT charged.',
+        '• Cross-Border B2B Reverse Charge: When supplying services B2B to another EU country or internationally, ensure you verify the customer’s VAT ID and apply the reverse charge mechanism if appropriate.',
       ],
     },
   ],
   faqs: [
     {
-      question: 'Why can’t I just subtract 20% from a gross price to remove 20% VAT?',
-      answer: 'Because the 20% VAT was originally added to the net amount, not the gross. For instance, €100 + 20% (€20) = €120. If you subtract 20% of €120 (€24), you get €96, which is incorrect. The mathematically correct method is dividing the gross total by 1.20 (Gross ÷ 1.20 = €100).',
+      question: 'Why can I not extract VAT by just subtracting 20% from the Gross total?',
+      answer: 'Because the 20% tax was added to a smaller base (the Net amount), not the Gross amount. For example, 20% added to €100 gives €120. If you take 20% of €120, you get €24, which would wrongly leave €96 instead of the true €100 Net base. The correct mathematical formula is dividing by 1.20.',
     },
     {
-      question: 'What is the difference between VAT and US Sales Tax?',
-      answer: 'VAT is a multi-stage tax collected at every step of production and distribution with businesses claiming input credits. US Sales Tax is a single-stage retail tax collected only when the final consumer purchases the product, without intermediate tax credits.',
+      question: 'When should a business register for VAT?',
+      answer: 'In most jurisdictions, registration is mandatory once your taxable turnover surpasses the statutory threshold over a rolling 12-month period (e.g., £90,000 in the UK, or €40,000 for services / €80,000 for goods in Ireland). Voluntary registration is also permitted and advantageous if you wish to reclaim input tax on startup expenses.',
     },
     {
-      question: 'When is a business legally required to register for VAT?',
-      answer: 'Registration thresholds vary by country. In the UK, registration is mandatory once taxable turnover exceeds £90,000 in a rolling 12-month period. In Ireland, thresholds are €40,000 for services and €80,000 for goods. In the EU, non-resident businesses selling digital services to consumers must register from their first euro unless using the One-Stop-Shop (OSS) scheme.',
+      question: 'What is the difference between Zero-Rated (0%) and VAT-Exempt supplies?',
+      answer: 'Zero-rated goods (such as books, children’s clothing, or certain unprocessed foods) are taxable supplies charged at 0%, meaning businesses can still reclaim input VAT incurred in producing them. VAT-exempt services (such as medical, banking, or education) are outside the VAT scope, meaning businesses cannot reclaim input tax on related expenses.',
     },
     {
       question: 'Are digital downloads and SaaS software subject to VAT?',
       answer: 'Yes. In the UK, EU, and Australia, digital products (software, ebooks, subscriptions) supplied B2C are taxed at the VAT/GST rate of the customer’s country of residence. In B2B sales, the reverse charge mechanism usually applies if the buyer provides a valid VAT ID.',
+    },
+    {
+      question: 'How do rounding rules work on multi-item VAT invoices?',
+      answer: 'Tax authorities generally allow either line-by-line rounding or invoice-total rounding, provided the method is applied consistently. Our calculator provides a multi-line invoice tally that calculates line-item tax and computes the exact total to the nearest currency cent/penny.',
     },
   ],
 };
@@ -151,6 +158,12 @@ Take-Home Pay     = Gross Salary - Pension Contribution - Income Tax - Social Ta
         'A higher-rate taxpayer paying 40% income tax plus 2% social contributions saves €42/£42 in taxes for every €100/£100 contributed to their retirement fund, meaning an actual out-of-pocket cost of only €58/£58.',
       ],
     },
+    {
+      heading: '4. Understanding Cumulative vs. Week 1 / Month 1 Tax Codes',
+      content: [
+        'Under standard payroll systems, your tax allowances are calculated on a cumulative basis throughout the tax year, ensuring your tax liabilities are smoothed evenly across pay periods. If you change jobs or have temporary gaps in employment, cumulative tax codes automatically refund overpaid tax in subsequent pay periods.',
+      ],
+    },
   ],
   faqs: [
     {
@@ -164,6 +177,14 @@ Take-Home Pay     = Gross Salary - Pension Contribution - Income Tax - Social Ta
     {
       question: 'How do tax credits differ from tax deductions?',
       answer: 'A tax deduction reduces your gross taxable income before tax calculation (saving you money proportional to your tax bracket). A tax credit is subtracted directly from your final calculated tax liability dollar-for-dollar.',
+    },
+    {
+      question: 'How do pension contributions reduce my tax liability?',
+      answer: 'Contributions to qualifying workplace pensions or personal retirement plans (such as 401(k), SIPP, or PRSA) are deducted from gross income before tax is calculated, providing instant tax relief at your highest marginal rate.',
+    },
+    {
+      question: 'What happens to the UK Personal Allowance on salaries above £100,000?',
+      answer: 'In the UK, the standard £12,570 Personal Allowance tapers down by £1 for every £2 of adjusted net income over £100,000, creating an effective 60% marginal income tax rate between £100,000 and £125,140.',
     },
   ],
 };
@@ -212,6 +233,18 @@ Safe-to-Spend Net  = Taxable Profit - Income Tax Buffer - Social Buffer - Emerge
         result: 'Safe Take-Home = $4,904.50/mo | Tax Reserve = $3,170.50/mo | Overhead = $1,500.00/mo',
       },
     },
+    {
+      heading: '3. Establishing a Quarterly Estimated Tax Routine',
+      content: [
+        'Self-employed individuals must make periodic quarterly tax payments to avoid statutory penalties. In the US, quarterly estimated taxes are due in April, June, September, and January. In the UK, self-assessment "Payments on Account" occur each January 31 and July 31. Ireland uses Preliminary Tax payments in October/November.',
+      ],
+    },
+    {
+      heading: '4. Maintaining Separation Between Personal and Business Finances',
+      content: [
+        'Opening a dedicated business checking account simplifies expense categorization, ensures clean audit trails, and eliminates accidental commingling of tax reserve capital with personal living expenses.',
+      ],
+    },
   ],
   faqs: [
     {
@@ -225,6 +258,14 @@ Safe-to-Spend Net  = Taxable Profit - Income Tax Buffer - Social Buffer - Emerge
     {
       question: 'How do I account for home office expenses?',
       answer: 'You can either use a simplified flat-rate method (e.g. HMRC simplified expenses or IRS standard $5/sq ft up to $1,500) or calculate actual utility and rent costs apportioned by the percentage of space and time used exclusively for business.',
+    },
+    {
+      question: 'Do I need to register for VAT if I am a freelance sole trader?',
+      answer: 'Yes, if your taxable freelance revenue crosses the local statutory threshold. In many digital sectors, voluntary VAT registration is also beneficial if you sell B2B across borders under reverse charge mechanisms.',
+    },
+    {
+      question: 'How do quarterly preliminary tax payments work for self-employed professionals?',
+      answer: 'Rather than paying one large annual tax bill, revenue authorities require advance payments based on either 100% of your previous year’s tax liability or 90% of your current estimated liability, distributed across quarterly installments.',
     },
   ],
 };
@@ -256,7 +297,7 @@ CGT Payable        = Taxable Gain × Applicable CGT Rate (%)`,
           'Step 2: Total Acquisition Base Cost = £250,000 + £10,000 + £25,000 = £285,000.',
           'Step 3: Sale price in 2026 = £360,000. Estate Agent & Legal Fees on sale = £6,000.',
           'Step 4: Gross Capital Gain = £360,000 - £285,000 - £6,000 = £69,000.',
-          'Step 5: Apply UK Annual Exemption Allowance (£3,000) $\\to$ Taxable Gain = £66,000.',
+          'Step 5: Apply UK Annual Exemption Allowance (£3,000) → Taxable Gain = £66,000.',
           'Step 6: Residential Property CGT @ 24% = £66,000 × 0.24 = £15,840.00.',
         ],
         result: 'Taxable Gain = £66,000.00 | CGT Payable = £15,840.00 | Net Post-Tax Proceeds = £338,160.00',
@@ -268,6 +309,18 @@ CGT Payable        = Taxable Gain × Applicable CGT Rate (%)`,
         '• Ireland (Revenue): Standard CGT rate is 33% on most capital assets (venture capital relief may reduce to 10% on business disposals under entrepreneur relief). Every individual receives an annual small gains exemption of €1,270.',
         '• United Kingdom (HMRC): Standard rate is 10% (basic rate) / 20% (higher rate) for shares and general assets. Residential property gains are taxed at 18% / 24%. The annual exempt allowance is £3,000.',
         '• United States (IRS): Long-term capital gains (assets held > 1 year) are taxed at preferential rates of 0%, 15%, or 20% based on taxable income tiers (plus 3.8% Net Investment Income Tax for high earners). Short-term gains (< 1 year) are taxed at ordinary income tax rates up to 37%.',
+      ],
+    },
+    {
+      heading: '3. Carrying Forward and Offsetting Capital Losses',
+      content: [
+        'If you dispose of an asset at a financial loss, that loss can offset other capital gains made in the same tax year. Any remaining allowable losses can be declared to your tax authority and carried forward indefinitely to reduce capital gains in future tax years.',
+      ],
+    },
+    {
+      heading: '4. Timing Disposals Around Tax Year Boundaries',
+      content: [
+        'Because annual exemption allowances do not roll over to subsequent years (use it or lose it), investors often stagger the disposal of appreciating assets across multiple tax years to maximize statutory tax-free exemption thresholds.',
       ],
     },
   ],
@@ -283,6 +336,14 @@ CGT Payable        = Taxable Gain × Applicable CGT Rate (%)`,
     {
       question: 'Is trading cryptocurrency subject to Capital Gains Tax?',
       answer: 'Yes. Swapping one crypto token for another, selling crypto for fiat currency, or spending cryptocurrency on goods and services are all disposal events subject to CGT reporting based on the fair market value at the time of disposal.',
+    },
+    {
+      question: 'Which costs are allowable as capital improvements?',
+      answer: 'Only capital expenditures that provide a permanent physical enhancement or increase the asset’s market value (such as building a house extension, installing solar panels, or major architectural renovations) qualify as allowable base cost additions.',
+    },
+    {
+      question: 'How does the holding period affect my Capital Gains Tax rate?',
+      answer: 'In countries like the United States and Australia, holding an asset for longer than 12 months qualifies you for discounted long-term capital gains tax rates (up to 50% discount in Australia or 0%/15%/20% preferential rates in the US).',
     },
   ],
 };
@@ -317,8 +378,8 @@ Net Margin %      = Net Post-Tax Profit ÷ Net Revenue × 100`,
           'Step 2: Calculate net selling price: €30.00 ÷ (1 - 0.40) = €50.00.',
           'Step 3: Gross profit per unit = €50.00 - €30.00 = €20.00 (Markup = 66.67%).',
           'Step 4: Add 20% VAT: €50.00 × 1.20 = €60.00 retail shelf price.',
-          'Step 5: Deduct operating overhead per unit (€5.00) $\\to$ Operating Profit = €15.00.',
-          'Step 6: Deduct Corporate Tax (12.5% in Ireland) = €1.88 $\\to$ Net Profit = €13.12 (Net Margin = 26.24%).',
+          'Step 5: Deduct operating overhead per unit (€5.00) → Operating Profit = €15.00.',
+          'Step 6: Deduct Corporate Tax (12.5% in Ireland) = €1.88 → Net Profit = €13.12 (Net Margin = 26.24%).',
         ],
         result: 'Retail Price (Inc VAT) = €60.00 | Net Price = €50.00 | Net Post-Tax Profit = €13.12 (26.24%)',
       },
@@ -328,6 +389,18 @@ Net Margin %      = Net Post-Tax Profit ÷ Net Revenue × 100`,
       content: [
         'Achieving positive gross profit is insufficient if total gross margin fails to cover fixed operating overheads (rent, salaries, software, insurance). The break-even volume calculates the exact number of units required to cover all fixed costs before generating taxable operating profit.',
         'Once break-even is surpassed, corporate income taxes (e.g., 12.5% in Ireland, 19%-25% in the UK, 21% in the US) apply to remaining operating profits.',
+      ],
+    },
+    {
+      heading: '3. Volume Break-Even Equation',
+      content: [
+        'The unit break-even point is calculated as: Fixed Costs ÷ (Net Selling Price - Unit Cost). Every unit sold above this threshold contributes directly to operating profit and net after-tax margin.',
+      ],
+    },
+    {
+      heading: '4. Protecting Margins Against Inflation and Shipping Fluctuations',
+      content: [
+        'Regularly auditing Unit COGS to account for freight shipping rate changes, payment processing transaction fees (e.g., 2.9% + $0.30), and raw material price increases ensures your actual realized net margin matches your business plan.',
       ],
     },
   ],
@@ -343,6 +416,14 @@ Net Margin %      = Net Post-Tax Profit ÷ Net Revenue × 100`,
     {
       question: 'What is a healthy net profit margin for a business?',
       answer: 'Healthy net margins vary by sector: retail groceries and e-commerce typically operate on 2% to 10% net margins, professional services and consulting achieve 15% to 30%, and software/SaaS companies can exceed 25% to 40% net post-tax margins.',
+    },
+    {
+      question: 'What are Operating Overheads and how do they differ from COGS?',
+      answer: 'Cost of Goods Sold (COGS) includes direct costs that increase with every unit produced (raw materials, packaging, direct assembly labor). Operating overheads are indirect fixed costs (office rent, accounting software, insurance, marketing retainers) incurred regardless of unit sales.',
+    },
+    {
+      question: 'How does Corporate Income Tax impact pricing strategy?',
+      answer: 'Corporate tax is levied on net operating taxable income (Gross Profit - Operating Expenses). Businesses must model both pre-tax operating margin and net post-tax cash margin to ensure adequate retained earnings for reinvestment and shareholder dividends.',
     },
   ],
 };

@@ -1,10 +1,18 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Percent, Home } from 'lucide-react';
+import { SEOHead } from '../components/common/SEOHead';
 
 export const NotFoundPage: React.FC = () => {
   return (
     <div className="min-h-[60vh] flex flex-col items-center justify-center text-center space-y-6 px-4">
+      <SEOHead
+        title="404 - Page Not Found | vatcalcs.net"
+        description="The requested calculator page could not be found. Return to the vatcalcs.net homepage to access our full suite of tax tools."
+        canonicalPath="/404"
+        schemaType="WebPage"
+      />
+
       <div className="relative flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-tr from-emerald-600 via-teal-600 to-indigo-600 text-white shadow-xl">
         <Percent className="w-10 h-10" />
       </div>

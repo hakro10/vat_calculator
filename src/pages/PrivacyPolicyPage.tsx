@@ -1,11 +1,19 @@
 import React from 'react';
 import { Breadcrumbs } from '../components/common/Breadcrumbs';
+import { SEOHead } from '../components/common/SEOHead';
 import { ShieldCheck, Lock } from 'lucide-react';
 import { PRIVACY_POLICY_DATA } from '../data/legalContent';
 
 export const PrivacyPolicyPage: React.FC = () => {
   return (
     <div className="max-w-4xl mx-auto space-y-8">
+      <SEOHead
+        title="Privacy Policy | 100% Client-Side Privacy Guarantee | vatcalcs.net"
+        description="Read the vatcalcs.net privacy policy. Learn how our 100% client-side calculation architecture protects your financial data with zero server logging."
+        canonicalPath="/privacy-policy"
+        schemaType="WebPage"
+      />
+
       <Breadcrumbs items={[{ label: 'Privacy Policy', path: '/privacy-policy' }]} />
 
       {/* Header */}

@@ -1,11 +1,19 @@
 import React from 'react';
 import { Breadcrumbs } from '../components/common/Breadcrumbs';
-import { Sparkles } from 'lucide-react';
+import { SEOHead } from '../components/common/SEOHead';
+import { Sparkles, Mail } from 'lucide-react';
 import { ABOUT_US_DATA } from '../data/legalContent';
 
 export const AboutPage: React.FC = () => {
   return (
     <div className="max-w-4xl mx-auto space-y-10">
+      <SEOHead
+        title="About Us | Precision Financial Engineering | vatcalcs.net"
+        description="Discover the mission behind vatcalcs.net: delivering high-speed, accurate, and completely private financial and tax calculation tools worldwide."
+        canonicalPath="/about"
+        schemaType="AboutPage"
+      />
+
       <Breadcrumbs items={[{ label: 'About Us', path: '/about' }]} />
 
       {/* Header */}
@@ -48,6 +56,13 @@ export const AboutPage: React.FC = () => {
           {ABOUT_US_DATA.paragraphs.map((p, idx) => (
             <p key={idx}>{p}</p>
           ))}
+        </div>
+        <div className="pt-4 border-t border-slate-200 dark:border-slate-800 flex items-center gap-2 text-sm text-slate-600 dark:text-slate-300">
+          <Mail className="w-4 h-4 text-emerald-600" />
+          <span>Direct Contact: </span>
+          <a href="mailto:support@vatcalcs.net" className="font-semibold text-emerald-600 hover:underline">
+            support@vatcalcs.net
+          </a>
         </div>
       </div>
 

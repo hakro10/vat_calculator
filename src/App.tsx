@@ -92,10 +92,7 @@ export function App() {
           {/* Legal & Company Pages */}
           <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
           <Route path="/terms-of-service" element={<TermsOfServicePage />} />
-          <Route 
-            path="/cookie-policy" 
-            element={<CookiePolicyPage onOpenCookieModal={openCustomize} />} 
-          />
+          <Route path="/cookie-policy" element={<CookiePolicyPage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/contact" element={<ContactPage />} />
 
